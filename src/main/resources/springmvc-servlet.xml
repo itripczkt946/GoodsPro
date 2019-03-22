@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <!--对cn.goods.controller包中的类进行扫描，让cn.goods.controller包中标注了springmvc注解的类
+    生效。-->
+    <context:component-scan base-package="cn.goods.controller"/>
+    <!--让当前项目支持springmvc的注解-->
+    <mvc:annotation-driven/>
+
+    <!--配置springmvc的内部资源视图解析器   return "goodsList";  //返回逻辑视图名。-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--配置前缀    /WEB-INF/jsp/goodsList.jsp -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--采用<mv:resources/>标签即可解决静态资源的访问问题。-->
+    <mvc:resources mapping="/statics/**" location="/statics/" />
+
+</beans>
